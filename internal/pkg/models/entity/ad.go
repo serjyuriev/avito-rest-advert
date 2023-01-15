@@ -17,11 +17,11 @@ type Ad struct {
 	Description string
 	MainPhoto   string
 	AllPhotos   []string
-	Price       Currency
+	Price       Rubles
 	Added       time.Time
 }
 
-func NewAd(name string, description string, photos []string, price Currency) (*Ad, error) {
+func NewAd(name string, description string, photos []string, price Rubles) (*Ad, error) {
 	if len(name) > 200 {
 		return nil, ErrAdNameIsTooLong
 	}

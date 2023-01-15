@@ -19,7 +19,7 @@ func TestNewAd(t *testing.T) {
 		adName        string
 		adDescription string
 		adPhotos      []string
-		adPrice       Currency
+		adPrice       Rubles
 		want          want
 	}{
 		{
@@ -31,10 +31,7 @@ func TestNewAd(t *testing.T) {
 				"https://74.img.avito.st/image/1/1.agsdva",
 				"https://23.img.avito.st/image/1/1.4jh3wn",
 			},
-			adPrice: &rubles{
-				name:  "руб.",
-				value: 1530000,
-			},
+			adPrice: Rubles(1530000),
 			want: want{
 				ad: &Ad{
 					Name:        "Робот-пылесос XIAOMI",
@@ -45,10 +42,7 @@ func TestNewAd(t *testing.T) {
 						"https://74.img.avito.st/image/1/1.agsdva",
 						"https://23.img.avito.st/image/1/1.4jh3wn",
 					},
-					Price: &rubles{
-						name:  "руб.",
-						value: 1530000,
-					},
+					Price: Rubles(1530000),
 				},
 				hasError: false,
 				err:      nil,
@@ -63,10 +57,7 @@ func TestNewAd(t *testing.T) {
 				"https://74.img.avito.st/image/1/1.agsdva",
 				"https://23.img.avito.st/image/1/1.4jh3wn",
 			},
-			adPrice: &rubles{
-				name:  "руб.",
-				value: 1530000,
-			},
+			adPrice: Rubles(1530000),
 			want: want{
 				ad:       nil,
 				hasError: true,
@@ -82,10 +73,7 @@ func TestNewAd(t *testing.T) {
 				"https://11.img.avito.st/image/1/1.112fqa",
 				"https://21.img.avito.st/image/1/1.b24b6t",
 			},
-			adPrice: &rubles{
-				name:  "руб.",
-				value: 2166050,
-			},
+			adPrice: Rubles(2166050),
 			want: want{
 				ad:       nil,
 				hasError: true,
@@ -104,10 +92,7 @@ func TestNewAd(t *testing.T) {
 				"https://21.img.avito.st/image/1/1.gb346j",
 				"https://21.img.avito.st/image/1/1.243gtm",
 			},
-			adPrice: &rubles{
-				name:  "руб.",
-				value: 990000,
-			},
+			adPrice: Rubles(990000),
 			want: want{
 				ad:       nil,
 				hasError: true,
@@ -126,7 +111,7 @@ func TestNewAd(t *testing.T) {
 				assert.Equal(t, tt.want.ad.Description, ad.Description)
 				assert.Equal(t, tt.want.ad.MainPhoto, ad.MainPhoto)
 				assert.Equal(t, tt.want.ad.AllPhotos, ad.AllPhotos)
-				assert.Equal(t, tt.want.ad.Price.Raw(), ad.Price.Raw())
+				assert.Equal(t, tt.want.ad.Price, ad.Price)
 				assert.LessOrEqual(t, ad.Added, time.Now())
 			}
 		})
